@@ -40,7 +40,7 @@ pipeline {
     stage('Git Checkout') {
       steps {
         sh "mkdir ${appFolder}"
-        dir(appFolder){
+        dir(appFolder) {
           git url: "${appSourceUrl}", branch: "${appSourceRef}"
         }
       }
@@ -48,7 +48,7 @@ pipeline {
     stage('Java Build') {
       steps{
         script {
-          dir(appFolder}{
+          dir(appFolder} {
             sh "mvn clean install -Djar.finalNa
           }
         }
@@ -58,7 +58,7 @@ pipeline {
     // Build Container Image using the artifacts produced in previous stages
     stage('Build Container Image'){
       steps {
-        dir(appFolder}{
+        dir(appFolder) {
           binaryBuild( buildConfigName: appName, buildFromPath: ".")
         }
       }
