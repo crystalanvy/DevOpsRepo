@@ -38,17 +38,15 @@ pipeline {
     // This is required as Pipeline code is originally checkedout to
     // Jenkins Master but this will also pull this same code to this slave
     stage('Git Checkout') {
-      steps {
-        
+      steps {        
           git url: "${appSourceUrl}", branch: "${appSourceRef}"
-     
       }
     }
     
     // Build Container Image using the artifacts produced in previous stages
     stage('Build Container Image'){
       steps {
-        input message: 'Promote application to Production?'
+        binaryBuild(buildConfigName: appName, buildFromPath:"." )
       }
     }
 
