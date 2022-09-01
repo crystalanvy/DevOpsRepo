@@ -6,14 +6,6 @@ retriever: modernSCM(
   ]
 )
 
-openshift.withCluster() {
-  env.NAMESPACE = openshift.project()
-  echo "Starting Pipeline for ..."
-  env.BUILD = "build"
-  env.DEV = "dev"
-  env.STAGE = "stage"
-  env.PROD = "prod"
-}
 appSourceUrl = "https://github.com/crystalanvy/DevOpsRepo.git"
 appSourceRef = "main"
 appFolder = "app"
@@ -57,19 +49,19 @@ pipeline {
 
     stage ('Verify Deployment to Dev') {
       steps {
-        input message: 'Promote application to Production?'
+        input message: 'Verify Deployment to Dev'
       }
     }
 
-    stage('Promote from Dev to Stage') {
+    stage('Promote from Dev to UAT') {
       steps {
-        input message: 'Promote application to Production?'
+        input message: 'Promote application to UAT?'
       }
     }
 
     stage ('Verify Deployment to Stage') {
       steps {
-        input message: 'Promote application to Production?'
+        input message: 'Verify Deployment to Stage'
       }
     }
 
