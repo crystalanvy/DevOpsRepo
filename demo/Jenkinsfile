@@ -1,14 +1,12 @@
 
 pipeline{
     agent any
-    tools {
-        maven 'MAVEN'
-    }
+
     stages {
         stage('Build Maven') {
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/crystalanvy/Devops.git']]])
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
              }     
         }
         stage('Build Docker Image') {
