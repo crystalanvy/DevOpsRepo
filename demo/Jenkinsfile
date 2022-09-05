@@ -1,24 +1,4 @@
-pipeline {
-agent any
-tools{
-        maven 'maven_3_5_0'
-    }
-    stages{
-        stage('Build Maven'){
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '']]])
-                sh 'mvn clean install'
-            }
-        }
-        stage('Build docker image'){
-            steps{
-                script{
-                    sh 'docker build -t crystalanvy/dev_docker_1 .'
-                }
-            }
-        }
-}
-}
+
 pipeline{
     agent any
     tools {
@@ -27,7 +7,7 @@ pipeline{
     stages {
         stage('Build Maven') {
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'devopshint', url: 'https://github.com/crystalanvy/DevOpsRepo.git]]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'crystalanvy', url: 'https://github.com/crystalanvy/DevOpsRepo.git]]])
 
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
                 
