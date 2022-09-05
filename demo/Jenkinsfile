@@ -7,9 +7,12 @@ pipeline{
     stages {
         stage('Build Maven') {
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'crystalanvy', url: 'https://github.com/crystalanvy/DevOpsRepo.git]]])
-
+                steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/crystalanvy/Devops.git']]])
+                 
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+
                 
             }
         }
