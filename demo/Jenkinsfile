@@ -33,7 +33,7 @@ stage('Building our image') {
         }
         stage('Promote from Build to Dev') {
       steps {
-        input message: 'Promote application to Production?'
+        input message: 'Promote application to DEv?'
       }
     }
 
@@ -49,9 +49,9 @@ stage('Building our image') {
       }
     }
 
-    stage ('Verify Deployment to Stage') {
+    stage ('Verify Deployment to UAT') {
       steps {
-        input message: 'Verify Deployment to Stage'
+        input message: 'Verify Deployment to UAT'
       }
     }
 
